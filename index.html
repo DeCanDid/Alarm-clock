@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm</title>
+    <style>
+        .frame{
+            max-width: 400px;
+            height: 400px;
+            background-color: #eef2f5;
+            margin: auto;
+            border-radius: 20px;
+        }
+        #display img{
+            height: 200px;
+            min-width: 50%;
+        }
+
+    .inputs{
+        margin: auto;
+        width: 200px;
+        text-align: center;
+    }
+  
+    input{
+        text-align: center;
+        font-weight: bold;
+        width: 60px;
+        height: 30px;
+        border: 2px solid black;
+        background: transparent;
+        border-radius: 4px;
+        max-width: 90%;
+    }
+    select{
+        font-weight: bold;
+        width: 48px;
+        height: 35px;
+        border: 2px solid black;
+        border-radius: 4px;
+    }
+    button{
+        width: 50px;
+        height: 35px;
+        border: 2px solid black;
+        background: transparent;
+        font-weight: bold;
+        border-radius: 4px;
+        
+    }
+    h2{
+        color: #87ceeb;
+    }
+    #spans span{
+        font-size: xx-large;
+        font-weight: bolder;
+    }
+    #color{
+        cursor: pointer;
+    }
+
+    #color:active{
+        background-color: green;
+        border: none;
+        color: #fff;
+    }
+    select{
+        background: transparent;
+    }
+    .Disabled{
+        cursor: none;
+        opacity: 0.6;
+    }
+    </style>
+</head>
+<body>
+    <div class="frame">
+    <div id="display" style="text-align: center;">
+    <img src="./alarm.webp" alt="">
+
+    <div id="spans">
+    <span id="h">00</span>
+    <span>:</span>
+    <span id="m">00</span>
+    <span>:</span>
+    <span id="s">00</span>
+    </div>
+
+    <h2>Enter the time</h2>
+    </div>
+    <div class="inputs">
+    <input id="Hour" type="number" placeholder="Hour">
+    <input id="Minutes" type="number" placeholder="Minute">
+
+    <audio id="audio" src="./Burna_Boy_Ed_Sheeran_For_My_Hand_(thinkNews.com.ng).mp3"></audio>
+    </div>
+
+    <div name="stop" onclick="set()" id="color" style="text-align: center; padding:10px 0;margin-top:10px;
+     background-color:skyblue; border-radius:0 0 20px 20px; font-size:x-large; font-weight: bold;">Set Alarm</div>
+
+    </div>
+
+
+    <!-- <select name="" id="sel">
+        <option value="Hour" selected hidden>Hour</option>
+    </select>
+
+    <select name="" id="sel2">
+        <option value="Minute" selected hidden>Minute</option>
+    </select> -->
+</body>
+
+<script>
+    let hour = document.getElementById("Hour")
+    let minute = document.getElementById("Minutes")
+    let spans = document.getElementById('spans').innerHTML
+    let frame = document.querySelector('.frame')
+    let but = document.getElementById('color');
+    let date = new Date()
+    let h = document.getElementById('h')
+    let m = document.getElementById('m')
+    let s = document.getElementById('s')
+    let stopAlarm = false
+
+    
+    setInterval(() => {
+        let date = new Date()
+            h.innerHTML = date.getHours()
+            m.innerHTML = date.getMinutes()
+            s.innerHTML = date.getSeconds()
+        // if (hour.value == date.getHours() && minute.value == date.getMinutes()) {
+        //     document.getElementById('audio').play() 
+        // }
+    }, 1000);
+
+    // console.log(date.toLocaleDateString);
+    // console.log(date.toLocaleTimeString);
+    // console.log(date.getMinutes);
+    // console.log(date.getHours);
+    // console.log(date.getTime() * 60);
+    // console.log(Date.now());
+    // console.log(date.getMonth()+1);
+    // console.log(date.getFullYear);
+    // for (let index = 0; index < 24; index++) {
+    //     const element = index;
+    //     document.getElementById("sel").innerHTML += `<option value="${element}">${element}</option>`
+    // }
+    
+    // for (let index = 0; index < 60; index++) {
+    //     const element = index;
+    //     document.getElementById("sel2").innerHTML += `<option value="${element}">${element}</option>`
+    // }
+
+        function set() {
+            if (stopAlarm) {
+                hour.value = '';
+                minute.value = '';
+                but.innerText = 'Set Alarm';
+                document.getElementById('audio').pause()
+                return stopAlarm = false
+                
+            }
+
+            if (hour.value == '' || minute.value == '') {
+            alert('Please, set time')
+            }else if(minute.value > 59) {
+            alert('Invalid time, pls reset')
+        }
+            but.innerText = 'Clear Alarm'
+            
+            setInterval(() => {
+             let date = new Date()
+             if (hour.value == date.getHours() && minute.value == date.getMinutes()) {
+            document.getElementById('audio').play() 
+        }
+         }, 1000);
+             stopAlarm = true
+        }
+
+
+    //     setInterval(SetAlarm, 1000);
+    //     let date = new Date()
+    //     // console.log(min.value == date.getMinutes());
+    //     if (hour.value == date.getHours() && min.value == date.getMinutes) {
+    //     alert("Wake up")
+    // }
+
+
+    
+    
+</script>
+</html>
